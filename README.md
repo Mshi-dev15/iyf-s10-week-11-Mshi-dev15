@@ -100,46 +100,12 @@ npm start
 ## 🧗 Challenges Faced & Solutions
   |Challenge    |Solution |
   |-------------|----------|
-|- OverwriteModelError during nodemon restarts
-|- Added guarded model export: mongoose.models.User || mongoose.model(...)|
-|- next is not a function in async pre-save hook
-|- Removed next parameter from async middleware functions|
-|- JWT expireIn typo causing sign errors
-|- Corrected to expiresIn (with 's')|
-|- Mixing route code into model files
-|- Enforced separation: models = schemas only, routes = express routers|
-|- Case-sensitivity issues on Windows (User.js vs user.js)
-|- Standardized on capital-case filenames and imports|
-|- Testing protected routes without tokens
-|- Used Thunder Client to attach Authorization: Bearer <token> header|
-
----
-
-### 📂 Project Structure
-iyf-s10-week-11-Mshi-dev15/
-├── src/
-│   ├── config/
-│   │   └── database.js          # MongoDB connection logic
-│   ├── controllers/
-│   │   ├── authController.js    # Register, login, getMe
-│   │   ├── postsController.js   # CRUD + like + ownership checks
-│   │   └── commentsController.js# Nested comment operations
-│   ├── middleware/
-│   │   └── auth.js              # protect, optionalAuth, restrictTo
-│   ├── models/
-│   │   ├── User.js              # User schema + password hashing
-│   │   ├── Post.js              # Post schema + text search + like method
-│   │   └── Comment.js           # Comment schema + Post reference
-│   ├── routes/
-│   │   ├── auth.js              # /api/auth endpoints
-│   │   └── posts.js             # /api/posts + nested comments
-│   ├── app.js                   # Express app + middleware + routes
-│   └── server.js                # Entry point + DB connect + listen
-├── .env                         # Environment variables (gitignored)
-├── .gitignore                   # Excludes node_modules, .env, logs
-├── package.json                 # Dependencies + scripts
-├── README.md                    # You are here! 🎉
-└── test-models.js               # Optional: quick model validation script
+|OverwriteModelError during nodemon restarts|Added guarded model export: mongoose.models.User || mongoose.model(...)|
+|next is not a function in async pre-save hook| Removed next parameter from async middleware functions|
+|JWT expireIn typo causing sign errors|Corrected to expiresIn (with 's')|
+|Mixing route code into model files|Enforced separation: models = schemas only, routes = express routers|
+|Case-sensitivity issues on Windows (User.js vs user.js)|Standardized on capital-case filenames and imports|
+|Testing protected routes without tokens|Used Thunder Client to attach Authorization: Bearer <token> header|
 
 ---
 
