@@ -1,14 +1,28 @@
 require('dotenv').config();
 const mongoose = require('mongoose');
-
-console.log('Testing connection to:', process.env.MONGODB_URI.replace(/:[^:]+@/, ':****@'));
+const Post = require('./src/models/Post');
 
 mongoose.connect(process.env.MONGODB_URI)
-  .then(() => {
-    console.log('✅ MongoDB connected successfully!');
+  .then(async () => {
+    console.log('✅ Connected to MongoDB');
+    
+    // Try creating a test post
+    const testPost = new Post({
+      title: 'Test Post',
+      content: 'This is a test post with enough content to pass validation.',
+      author: 'Mshi'
+    });
+    
+    const saved = await testPost.save();
+    console.log('✅ Post saved:', saved.title);
+    
+    // Clean up: delete the test post
+    await Post.findByIdAndDelete(saved._id);
+    console.log('✅ Test post deleted');
+    
     process.exit(0);
   })
   .catch(err => {
-    console.error('❌ Connection failed:', err.message);
+    console.error('❌ Error:', err.message);
     process.exit(1);
   });

@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 const postsController = require('../controllers/postsController');
 const commentsController = require('../controllers/commentsController');
+const { protect } = require('../middleware/auth');
+
 
 // 📝 Post routes
 router.get('/', postsController.getAllPosts);

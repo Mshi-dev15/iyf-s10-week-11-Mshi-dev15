@@ -43,13 +43,14 @@ const getAllPosts = async(req, res, next)=>{
 
 const getPostById = async(req, res, next)=>{
     try{
-        const post = awaitPost.findById(req.params.id);
+        const post = await Post.findById(req.params.id)
+        .populate('author', 'username email');
         if(!post){
             return res.status(400).json({error: 'Post not found'});
         }
         res.json(post);
     }catch(error){
-        if(error.name ==='castError'){
+        if(error.name ==='CastError'){
             return res.status(400).json({error: 'Invalid post ID'});
         }
         next(error);
@@ -63,16 +64,19 @@ const createPost = async(req, res, next)=>{
         const post = new Post({
             title,
             content,
-            author,
+            author: req.user._id,
             tags
         });
 
         await post.save();
+        //populate
+        await post.populate('author', 'username email');
+
         res.status(201).json(post);
     }catch (error){
         if(error.name ==='ValidationError'){
             const messages = Object.values(error.errors).map(e=> e.message);
-            return res.status(400).json({errors: message});
+            return res.status(400).json({errors: messages});
         }
         next(error);
     }
@@ -83,17 +87,27 @@ const createPost = async(req, res, next)=>{
 const updatePost = async (req, res, next)=>{
     try{
         const{title, content, tags} = req.body;
-        const post = await Post.findByIdAndUpdate(
-        req.params.id,
-        {title, content, tags},
-       {
-        new: true,
-        runValidators: true
-       }
-        );
+        const post = await Post.findByIdAndUpdate(req.params.id);
+        
     if (!post){
         return res.status(404).json({error: 'Post not found'});
     }
+//only author can edit
+if(post.author.toString() !==req.user._id.toString()){
+    return res.status(403).json({
+        error: 'You can only edit your own post'
+    });
+}
+
+//update field
+post.title = title || post.title;
+post.content = content || post.content;
+post.tags =tags || post.tags;
+
+await post.save();
+//populate
+await post.populate('author','username');
+
     res.json(post);
 }catch (error){
     next(error);
@@ -107,6 +121,13 @@ const deletePost = async(req, res, next)=>{
         if(!post){
             return res.status(404).json({error: 'Post not found'});
         }
+        if(post.author.toString() !==req.user._id.toString()){
+            return res.status(403).json({
+                error: 'You can only delete ypour own posts'
+            });
+        }
+        await post.deleteOne();
+
         res.status(204).send();
     }catch(error){
         next(error);
@@ -121,6 +142,8 @@ const likePost = async(req, res, next)=>{
             return res.status(404).json({error: 'Post not found'});
         }
         await post.like();
+
+        res.json(post);
     }catch(error){
         next(error);
     }
