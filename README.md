@@ -11,13 +11,13 @@
 
 ---
 
-## 👨‍ Author
+## Author
 
-**Name**  Faith Mshiki 
-**GitHub**  [@Mshi-dev15](https://github.com/Mshi-dev15) 
-**Program**  IYF Weekend Academy — Season 10 
-**Week** 11: Database Integration & Authentication 
-**Date**  April 24, 2026 
+- **Name**  Faith Mshiki 
+- **GitHub**  [@Mshi-dev15](https://github.com/Mshi-dev15) 
+- **Program**  IYF Weekend Academy — Season 10 
+- **Week** 11: Database Integration & Authentication 
+- **Date**  April 24, 2026 
 
 ---
 
@@ -41,27 +41,18 @@ The system supports CRUD operations for posts and comments, user authentication,
 
 ## 🚀 Features
 
-### 🔐 Authentication & Authorization
-- ✅ User registration with email/username validation
-- ✅ Secure login with JWT token generation
-- ✅ Password hashing with bcryptjs (never stored in plain text)
-- ✅ Protected routes: only authenticated users can create/edit/delete
-- ✅ Ownership checks: users can only modify their own posts
-- ✅ Role-based access control (user/admin) ready for expansion
-
-### 📝 Posts Management
-- ✅ Full CRUD: Create, Read, Update, Delete posts
-- ✅ Text search across title & content (MongoDB text indexes)
-- ✅ Filtering by author, sorting (newest/oldest/popular)
-- ✅ Pagination with metadata (page, limit, total, pages)
-- ✅ Like functionality with instance methods
-- ✅ Author population: posts return username instead of just ID
-
-### 💬 Comments System
-- ✅ Nested comments under posts: GET/POST/DELETE /api/posts/:id/comments
-- ✅ Reference relationships: Comment.post → Post._id
-- ✅ Validation: max 500 chars, required fields
-- ✅ Cascading-ready structure for future delete behaviors
+- ✅ Mongoose models for Posts, Comments, and Users
+- ✅ Full CRUD operations for posts
+- ✅ Comments system linked to posts
+- ✅ Search, filtering, sorting, and pagination
+- ✅ User registration with validation
+- ✅ Secure password hashing using bcrypt
+- ✅ User login with JWT authentication
+- ✅ Protected routes (only logged-in users can access)
+- ✅ Role-based authorization (user/admin)
+- ✅ Users can only edit/delete their own posts
+- ✅ Relationship between users and posts
+- ✅ Token-based authentication middleware
 
 ---
 
@@ -73,34 +64,28 @@ The system supports CRUD operations for posts and comments, user authentication,
 - MongoDB Atlas account (free tier)
 
 ### 2️⃣ Clone & Install
-```bash
 # Clone the repository
-git clone https://github.com/MaisoriKitayama/iyf-s10-week-11-Mshi-dev15.git
+git clone https://github.com/Mshi-dev15/iyf-s10-week-11-Mshi-dev15.git
 cd iyf-s10-week-11-Mshi-dev15
-
 # Install dependencies
 npm install
 
+
 ### 3️⃣ Configure Environment Variables
-MONGODB_URI=mongodb+srv://<username>:<password>@cluster.mongodb.net/community-hub?retryWrites=true&w=majority
-
-# Server
+MONGODB_URI=your_uri_here
 PORT=3000
-
-# JWT Authentication
-JWT_SECRET=your-super-secret-key-change-in-production
+JWT_SECRET=your-secret
 JWT_EXPIRES_IN=7d
 
 ### 4️⃣ Start the Server
 # Development (with hot-reload)
 npm run dev
-
 # Production
 npm start
 
 ---
 
-### 🧠 Lessons Learned
+## 🧠 Lessons Learned
 - How to connect a Node.js app to MongoDB using Mongoose
 - Designing schemas and relationships between models
 - Implementing CRUD operations with a database
@@ -112,8 +97,9 @@ npm start
 
 ---
 
-### 🧗 Challenges Faced & Solutions
+## 🧗 Challenges Faced & Solutions
   |Challenge    |Solution |
+  |-------------|----------|
 |- OverwriteModelError during nodemon restarts
 |- Added guarded model export: mongoose.models.User || mongoose.model(...)|
 |- next is not a function in async pre-save hook
