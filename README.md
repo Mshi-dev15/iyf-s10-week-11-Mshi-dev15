@@ -65,23 +65,23 @@ The system supports CRUD operations for posts and comments, user authentication,
 
 ### 2️⃣ Clone & Install
 # Clone the repository
-git clone https://github.com/Mshi-dev15/iyf-s10-week-11-Mshi-dev15.git
-cd iyf-s10-week-11-Mshi-dev15
+- git clone https://github.com/Mshi-dev15/iyf-s10-week-11-Mshi-dev15.git
+- cd iyf-s10-week-11-Mshi-dev15
 # Install dependencies
 npm install
 
 
 ### 3️⃣ Configure Environment Variables
-MONGODB_URI=your_uri_here
-PORT=3000
-JWT_SECRET=your-secret
-JWT_EXPIRES_IN=7d
+- MONGODB_URI=your_uri_here
+- PORT=3000
+- JWT_SECRET=your-secret
+- JWT_EXPIRES_IN=7d
 
 ### 4️⃣ Start the Server
 # Development (with hot-reload)
-npm run dev
+- npm run dev
 # Production
-npm start
+- npm start
 
 ---
 
