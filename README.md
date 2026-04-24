@@ -64,11 +64,10 @@ The system supports CRUD operations for posts and comments, user authentication,
 - MongoDB Atlas account (free tier)
 
 ### 2️⃣ Clone & Install
-# Clone the repository
 - git clone https://github.com/Mshi-dev15/iyf-s10-week-11-Mshi-dev15.git
 - cd iyf-s10-week-11-Mshi-dev15
-# Install dependencies
-npm install
+
+-npm install
 
 
 ### 3️⃣ Configure Environment Variables
@@ -78,9 +77,7 @@ npm install
 - JWT_EXPIRES_IN=7d
 
 ### 4️⃣ Start the Server
-# Development (with hot-reload)
 - npm run dev
-# Production
 - npm start
 
 ---
