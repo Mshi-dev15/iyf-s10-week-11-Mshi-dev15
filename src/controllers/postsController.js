@@ -93,7 +93,7 @@ const updatePost = async (req, res, next)=>{
         return res.status(404).json({error: 'Post not found'});
     }
 //only author can edit
-if(post.author.toString() !==req.user._id.toString()){
+if(post.author.toString() !==req.user._id.toString() && req.user.role !== 'admin'){
     return res.status(403).json({
         error: 'You can only edit your own post'
     });
@@ -120,7 +120,7 @@ const deletePost = async(req, res, next)=>{
         if(!post){
             return res.status(404).json({error: 'Post not found'});
         }
-        if(post.author.toString() !==req.user._id.toString()){
+        if(post.author.toString() !==req.user._id.toString() && req.user.role !== 'admin'){
             return res.status(403).json({
                 error: 'You can only delete ypour own posts'
             });
