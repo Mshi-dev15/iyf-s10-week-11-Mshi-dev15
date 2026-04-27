@@ -8,7 +8,7 @@ const protect = async (req, res, next)=>{
         if
 
 
-        (!authHeader || !authHeader.startWith('Bearer')){
+        (!authHeader || !authHeader.startsWith('Bearer')){
             return res.status(401).json({error: 'Access denied. No token provided.'});
         }
         const token =authHeader.split(' ')[1];
@@ -35,7 +35,7 @@ const protect = async (req, res, next)=>{
 const optionalAuth = async(req, res, next)=>{
     try{
         const authHeader = req.headers.authorization;
-        if(authHeader && authHeader.stsrtWith('Bearer')){
+        if(authHeader && authHeader.startsWith('Bearer')){
             const token = authHeader.split(' ')[1];
             const decode =jwt.verify(token,process.env.JWT_SECRET);
             req.user = await User.findById(decoded.id);

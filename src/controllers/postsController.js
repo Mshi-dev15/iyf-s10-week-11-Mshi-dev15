@@ -6,7 +6,7 @@ const getAllPosts = async(req, res, next)=>{
 
         let query = {};
        if(author){
-        query.author = new ReqExp(author, 'i');
+        query.author = new RegExp(author, 'i');
        }
        if(search){
         query.$text = {$search: search};
@@ -44,7 +44,7 @@ const getAllPosts = async(req, res, next)=>{
 const getPostById = async(req, res, next)=>{
     try{
         const post = await Post.findById(req.params.id)
-        .populate('author', 'username email');
+        //.populate('author', 'username email');
         if(!post){
             return res.status(400).json({error: 'Post not found'});
         }
@@ -70,7 +70,6 @@ const createPost = async(req, res, next)=>{
 
         await post.save();
         //populate
-        await post.populate('author', 'username email');
 
         res.status(201).json(post);
     }catch (error){
@@ -106,7 +105,6 @@ post.tags =tags || post.tags;
 
 await post.save();
 //populate
-await post.populate('author','username');
 
     res.json(post);
 }catch (error){
