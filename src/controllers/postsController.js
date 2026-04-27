@@ -20,6 +20,7 @@ const getAllPosts = async(req, res, next)=>{
 
        const skip= (page -1) * limit;
        const posts = await Post.find(query)
+       .populate('author', 'username')
        .sort(sortOption)
        .skip(skip)
        .limit(parseInt(limit));
